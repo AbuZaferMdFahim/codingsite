@@ -17,7 +17,7 @@ class User(AbstractUser):
 class Event(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(null=True,blank=True)
-    participants = models.ManyToManyField(User,blank=True)
+    participants = models.ManyToManyField(User,blank=True,related_name='events')
     date =  models.DateTimeField()
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -26,7 +26,7 @@ class Event(models.Model):
         return self.name
     
 class Submission(models.Model):
-    participant = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
+    participant = models.ForeignKey(User,on_delete=models.SET_NULL,null=True,related_name='submissions')
     event = models.ForeignKey(Event,on_delete=models.SET_NULL,null=True)
     details = models.TextField(null=True,blank=True)
 

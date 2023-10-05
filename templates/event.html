@@ -4,7 +4,18 @@
 {% block content %}
 
     <h1>{{event.name}}</h1> 
-    <a href="{% url 'registration_confirmation' event.id %}">Register</a>
+    {% if registered %} 
+        <p>You have Already Submitted your Project</p>
+    {%else%}
+        <a  href="{% url 'registration_confirmation' event.id %}">Register</a>
+    {%endif%}
+
+    {% if submitted %} 
+        <p>You have Already Registered for This Event</p>
+    {%else%}
+        <a  href="{% url 'project_submission_form' event.id %}">Submit Project</a>
+    {%endif%}
+
     <p>{{event.description}}</p>
 
     <div>
