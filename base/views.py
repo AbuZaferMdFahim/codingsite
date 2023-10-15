@@ -1,7 +1,11 @@
 from django.shortcuts import render,redirect
 from .models import User,Event,Submission
 from .forms import SubmissionForm
+from django.contrib.auth.decorators import login_required
 # Create your views here.
+
+def login(request):
+    return redirect(request, 'login_register.html')
 
 def home(request):
     users = User.objects.filter(hackathon_participant=True)
@@ -14,6 +18,7 @@ def profile(request,pk):
     context = {'user':user}
     return render(request,'profile.html',context)
 
+@login_required()
 def account(request):
     user = request.user
     context = {'user':user}
@@ -28,6 +33,7 @@ def event(request,pk):
     context = {'event':event, 'registered':registered, 'submitted':submitted}
     return render(request,'event.html',context)
 
+@login_required()
 def registration_confirmation(request,pk):
     event = Event.objects.get(id=pk)
 
@@ -38,6 +44,7 @@ def registration_confirmation(request,pk):
     context = {'event':event}
     return render(request, 'event_confirmation.html',context )
 
+@login_required()
 def project_submission_form(request,pk):
     event = Event.objects.get(id=pk)
 
@@ -57,6 +64,7 @@ def project_submission_form(request,pk):
     return render(request,'submit.html',context)
 
 #Add Owner Authentications
+@login_required()
 def update_project_form(request,pk):
     submission = Submission.objects.get(id=pk)
     event = submission.event
