@@ -2,12 +2,12 @@
 
 {% block content %}
 
-    {% if page == 'register' %}
+    {% if page == 'signup' %}
         <div class="login-register--container">
             <h1 class="form-field--title">Create an Account</h1>
 
             <div>
-            <form method="POST" action="{% url 'register' %}" enctype="multipart/form-data">
+            <form method="POST" action="{% url 'signup' %}" enctype="multipart/form-data">
                 <div id="form-wrapper">
                     {% csrf_token %}
                     {% for field in form %}
@@ -27,7 +27,7 @@
             </form> 
             </div>
 
-            <p class="login-register-switchpagetext">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+            <p class="login-register-switchpagetext">Already have an account? <a href="{% url 'signin' %}">Login</a></p>
         </div>
     
         {% else %}
@@ -35,7 +35,7 @@
             <p class="login-greattings">Welcome to</p>
             <h1 class="form-field--title">CodeBattels</h1>
 
-            <form method="POST" action="{% url 'login' %}">
+            <form method="POST" action="{% url 'signin' %}">
                 {% csrf_token %}
 
             
@@ -59,7 +59,7 @@
                     <input class="btn btn--primary formsubmit-btn" type="submit" value="Login"/>
                 </div>
 
-                <p class="login-register-switchpagetext">Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+                <p class="login-register-switchpagetext">Don't have an account? <a href="{% url 'signup' %}">Register</a></p>
             </form>
         </div>
         
