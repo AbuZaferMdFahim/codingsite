@@ -2,14 +2,16 @@
 
 {%block content %}
 
-<section>
+<section class="container--events">
     <h3>Events</h3>
 
-    <div id="event--lists">
+    <div class="events--lists">
         {% for event in events %}
         <a href="{% url 'event' event.id %}">
-            <div>
-                {{event.name}}
+            <div class="wrapper--event">
+                <h3>{{event.name}}</h3>
+                <p>{{event.participants.count}} registered</p>
+                <p>Registration Deadline: {{event.registration_deadline}}</p>
             </div>
         </a>
         {%endfor%}
@@ -20,15 +22,15 @@
 <section>
     <h3>Users</h3>
 
-    <div class="users--lists section">
+    <div class="users--lists">
         {% for user in users %}
             <a href="{% url 'profile' user.id%}">
                 <div class="wrapper--user">
-                    <!-- <div class="avatar__border">
+                    <div class="avatar__border">
                         <img class="user--avatar--sm" src="{{user.avatar.url}}"/>
-                    </div> -->
+                    </div>
         
-                    <p>{{user.name}}</p>
+                    <h4>{{user.name}}</h4>
              
                 </div>
             </a>

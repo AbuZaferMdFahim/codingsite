@@ -8,8 +8,7 @@ class User(AbstractUser):
     bio = models.TextField(null=True,blank=True)
 
     hackathon_participant = models.BooleanField(default=True,null=True) 
-
-    #avatar
+    avatar = models.ImageField(default='avatar.png')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
@@ -18,7 +17,9 @@ class Event(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField(null=True,blank=True)
     participants = models.ManyToManyField(User,blank=True,related_name='events')
-    date =  models.DateTimeField()
+    start_date =  models.DateTimeField(null=True)
+    end_date =  models.DateTimeField(null=True)
+    registration_deadline =  models.DateTimeField(null=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
