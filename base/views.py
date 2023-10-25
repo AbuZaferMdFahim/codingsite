@@ -47,16 +47,19 @@ def profile(request,pk):
     context = {'user':user}
     return render(request,'profile.html',context)
 
-@login_required(login_url='login')
+@login_required(login_url='signin')
 def account(request):
     user = request.user
     context = {'user':user}
     return render(request, 'account.html', context)
 
+@login_required(login_url='signin')
 def event(request, pk):
     event = Event.objects.get(id=pk)  # You can replace 'id' with the appropriate field or attribute in Event
-    submitted = Submission.objects.filter(participant=request.user, event=event).exists()
-    registered = request.user.events.filter(id=event.id).exists()
+    
+    if request.user.is_authenticated:
+        submitted = Submission.objects.filter(participant=request.user, event=event).exists()
+        registered = request.user.events.filter(id=event.id).exists()
 
     context = {'event': event, 'registered': registered, 'submitted': submitted}
     return render(request, 'event.html', context)

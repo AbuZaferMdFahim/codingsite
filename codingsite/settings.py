@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-qo^^2!7f04&_$d6i&htm2+77#i)=@gibyblat5)gomnl-!t=bw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'base.User'
 
@@ -127,6 +127,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 MEDIA_ROOT = BASE_DIR / 'media'  # Update the path to your media files directory
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
 # Default primary key field type

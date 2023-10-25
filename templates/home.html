@@ -19,10 +19,10 @@
 
 </section>
 
-<section>
+<section class="section">
     <h3>Users</h3>
 
-    <div class="users--lists">
+    <div class="users--lists section">
         {% for user in users %}
             <a href="{% url 'profile' user.id%}">
                 <div class="wrapper--user">

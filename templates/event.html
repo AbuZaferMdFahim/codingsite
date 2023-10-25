@@ -3,31 +3,46 @@
 
 {% block content %}
 
-    <h1>{{event.name}}</h1> 
-    {% if registered %} 
-        <p>You have Already Submitted your Project</p>
-    {%else%}
-        <a  href="{% url 'registration_confirmation' event.id %}">Register</a>
-    {%endif%}
+    <div class="section">
+        <h1>{{event.name}}</h1> 
+    </div>   
+    
+    <div class="section" id="event--action--wrapper">
 
-    {% if submitted %} 
-        <p>You have Already Registered for This Event</p>
-    {%else%}
-        <a  href="{% url 'project_submission_form' event.id %}">Submit Project</a>
-    {%endif%}
+        {% if registered %} 
+            <p class="text--success">You have Already Submitted your Project. </p>
+        {%else%}
+            <a class="btn btn--primary" href="{% url 'registration_confirmation' event.id %}">Register</a>
+        {%endif%}
 
-    <p>{{event.description}}</p>
+        {% if submitted %} 
+            <p class="text--success"> You have Already Registered for This Event. </p>
+        {%else%}
+            <a class="btn btn--primary" href="{% url 'project_submission_form' event.id %}">Submit Project</a>
+        {%endif%}
+        
+    </div>
 
-    <div>
+    <div class="section">
+    <p>{{event.description|linebreaks|urlize}}</p>
+    </div>   
+    <div class="section">
         <h3>Event Participants</h3>
 
-        <div>
+        <div class="users--lists section">
             {% for user in event.participants.all %}
-                <div>
-                    <strong>{{user.name}}</strong>
-                </div>
+                <a href="{% url 'profile' user.id%}">
+                    <div class="wrapper--user">
+                        <div class="avatar__border">
+                            <img class="user--avatar--sm" src="{{user.avatar.url}}"/>
+                        </div>
+            
+                        <h4>{{user.name}}</h4>
+                 
+                    </div>
+                </a>
             {% endfor %}
-        </div>
+        </div>      
 
     </div>
 
